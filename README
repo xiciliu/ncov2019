@@ -1,0 +1,10 @@
+使用说明
+两个部分
+1.
+python是用于从网络抓取资源数据，存储mysql。
+
+2.
+其他为maven web项目，展示数据。
+整个项目自动运行。
+
+demo: http://ncov.yao-wei.com
