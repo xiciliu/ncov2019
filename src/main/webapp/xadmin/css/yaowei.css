@@ -1,0 +1,4 @@
+@charset "utf-8";
+.layui-form-label-wide{
+	float:left;display:block;padding:9px 15px;width:120px;font-weight:400;line-height:20px;text-align:right
+}

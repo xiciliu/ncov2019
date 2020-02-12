@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+html {
+height: 100%;
+}
+body {
+margin: 0;
+padding: 0;
+min-height: 100%;
+position: relative;
+}
+			/*一直在第一屏的正中间 底部下方*/
+			.foot2{
+			    text-align: center;
+			    background-color: #fff;
+			    position: fixed; /*or前面的是absolute就可以用*/ /*固定在底部*/
+       			bottom: 0px;
+       			margin: auto;
+       			left: 0;
+       			right: 0;
+			}
+			.foot3{
+			    text-align: center;
+			    background-color: #fff;
+       			margin: auto;
+       			left: 0;
+       			right: 0;
+			}
+			/*一直在内容的正下方中间位置*/
+			.foot{
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				color: #969696;
+				text-align: center;
+			}
+			a{
+				text-decoration: none;
+			}
+			a:visited{
+				color:blue;	
+			}
