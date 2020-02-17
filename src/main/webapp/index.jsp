@@ -67,6 +67,82 @@ if(dao==null){
   <link href="css/timeline.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="js/modernizr.js"></script>
   
+  <script>
+  	/*endlesspage.js*/
+	
+	$(function () {
+		var gPageSize = 5;
+		var i = 1; //设置当前页数，全局变量
+	
+	    //根据页数读取数据
+	    function getData(pagenumber) {
+	        i++; //页码自动增加，保证下次调用时为新的一页。
+	        //console.log(i);
+	        //console.log(pagenumber);
+	        $.ajax({
+	            type: "get",
+	            url: '<%=request.getContextPath()%>/province/record',
+	            data: { pagesize: gPageSize, page: pagenumber },
+	            dataType: "json",
+	            success: function (res) {
+	                $(".loaddiv").hide();
+	                if(res.ok){
+						res.data.list.forEach(record=>{
+							var rec={};
+							rec.date=record.timeset;
+							rec.title=record.title;
+							rec.detail=record.detail;
+							rec.source=record.source;
+							rec.url=record.url;
+							
+							addnewrecord(rec);
+						});
+						
+					}
+	            },
+	            beforeSend: function () {
+	                $(".loaddiv").show();
+	            },
+	            error: function () {
+	                $(".loaddiv").hide();
+	            }
+	        });
+	    }
+	    //初始化加载第一页数据
+	    getData(1);
+	 
+	    
+	 
+	    //==============核心代码=============
+	    var winH = $(window).height(); //页面可视区域高度 
+	 
+	    var scrollHandler = function () {
+	        var pageH = $(document.body).height();
+	        var scrollT = $(window).scrollTop(); //滚动条top 
+	        var aa = (pageH - winH - scrollT) / winH;
+	        //console.log('scolled');
+	        if (aa < 0.02) {//0.02是个参数
+	            if (i % 10 === 0) {//每10页做一次停顿！
+	                getData(i);
+	                $(window).unbind('scroll');
+	                $("#btn_Page").show();
+	            } else {
+	                getData(i);
+	                $("#btn_Page").hide();
+	            }
+	        }
+	    }
+	    //定义鼠标滚动事件
+	    $(window).scroll(scrollHandler);
+	    //==============核心代码=============
+	 
+	    //继续加载按钮事件
+	    $("#btn_Page").click(function () {
+	        getData(i);
+	        $(window).scroll(scrollHandler);
+	    });
+	});
+  </script>
 </head>
 
 <body>
@@ -994,7 +1070,23 @@ if(dao==null){
   <div style="width:100%; background-color:#CCC;">最新动态</div>
   
   <section id="cd-timeline" class="cd-container">
-  </section> 
+  </section>
+  <style>
+	  .alink
+	  {
+	      display:none;
+	  }
+	  .loaddiv
+	  {
+	     display:none; 
+	  }
+  </style>
+  <div class="loaddiv">
+  	<img src="images/loading.gif" />
+  </div>
+  <div>
+  	<a href="javascript:void(0);" id="btn_Page" class="alink">查看更多>>></a>
+  </div> 
 <script>
 $(function(){
 	var $timeline_block = $('.cd-timeline-block');
@@ -1013,15 +1105,15 @@ $(function(){
 		});
 	});
 	
-	getnews();
+	//getnews(1);
 });
 </script>
 
 	<script>
-        function getnews(){
-			$.get('<%=request.getContextPath()%>/province/record').then(function (res) {
+        function getnews(p){
+			$.get('<%=request.getContextPath()%>/province/record',{'page':p}).then(function (res) {
 					if(res.ok){
-						res.data.forEach(record=>{
+						res.data.list.forEach(record=>{
 							var rec={};
 							rec.date=record.timeset;
 							rec.title=record.title;

@@ -42,10 +42,18 @@ public class ProvinceModule extends BaseModule{
     }
 	
 	@At("/record")
-    public Object queryrecord() {
+    public Object queryrecord(@Param("page")int page,@Param("pagesize")int pagesize, @Param("..")Pager pager) {
 		Cnd cnd =Cnd.NEW();
-        List<Record>data=dao.query(Record.class, cnd.orderBy("timeset", "desc"));
-        return new NutMap().setv("ok", data!=null).setv("msg", "success").setv("data", data);
+		cnd.orderBy("timeset", "desc");
+        //List<Record>data=dao.query(Record.class, cnd.orderBy("timeset", "desc"));
+		pager.setRecordCount(dao.count(Record.class,cnd));
+        pager.setPageSize(pagesize);
+        pager.setPageNumber(page);
+        QueryResult qr = new QueryResult();
+        qr.setList(dao.query(Record.class, cnd,pager));
+        qr.setPager(pager);
+        
+        return new NutMap().setv("ok", qr!=null).setv("msg", "success").setv("data", qr);
     }
 	
 	@At("/find")
