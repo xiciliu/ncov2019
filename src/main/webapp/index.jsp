@@ -1082,7 +1082,7 @@ if(dao==null){
 	  }
   </style>
   <div class="loaddiv">
-  	<img src="images/loading.gif" />
+  	<img src="images/loadingAnimation.gif" />
   </div>
   <div>
   	<a href="javascript:void(0);" id="btn_Page" class="alink">查看更多>>></a>
