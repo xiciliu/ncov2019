@@ -8,3 +8,34 @@ python是用于从网络抓取资源数据，存储mysql。
 整个项目自动运行。
 
 demo: http://ncov.yao-wei.com
+
+发现一个新的较好的数据源，含全球数据和中国省份数据，Serving data from John Hopkins University CSSE as a [JSON API](https://covid19.mathdro.id/)
+
+api格式：
+{
+    "confirmed": {
+        "value": 162687,
+        "detail": "https://covid19.mathdro.id/api/confirmed"
+    },
+    "recovered": {
+        "value": 75620,
+        "detail": "https://covid19.mathdro.id/api/recovered"
+    },
+    "deaths": {
+        "value": 6065,
+        "detail": "https://covid19.mathdro.id/api/deaths"
+    },
+    "dailySummary": "https://covid19.mathdro.id/api/daily",
+    "dailyTimeSeries": {
+        "pattern": "https://covid19.mathdro.id/api/daily/[dateString]",
+        "example": "https://covid19.mathdro.id/api/daily/2-14-2020"
+    },
+    "image": "https://covid19.mathdro.id/api/og",
+    "source": "https://github.com/mathdroid/covid19",
+    "countries": "https://covid19.mathdro.id/api/countries",
+    "countryDetail": {
+        "pattern": "https://covid19.mathdro.id/api/countries/[country]",
+        "example": "https://covid19.mathdro.id/api/countries/USA"
+    },
+    "lastUpdate": "2020-03-15T18:20:19.000Z"
+}
