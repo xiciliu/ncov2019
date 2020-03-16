@@ -9,6 +9,12 @@ python是用于从网络抓取资源数据，存储mysql。
 
 demo: http://ncov.yao-wei.com
 
+添加一个全球看板
+https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6 桌面端
+
+http://www.arcgis.com/apps/opsdashboard/index.html#/85320e2ea5424dfaaa75ae62e5c06e61 手机端
+
+
 发现一个新的较好的数据源，含全球数据和中国省份数据，Serving data from John Hopkins University CSSE as a [JSON API](https://covid19.mathdro.id/)
 
 api格式：
